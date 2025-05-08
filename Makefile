@@ -1,3 +1,14 @@
+# Makefile to generate HTML pages from reStructuredText files in ``$(SRC)``.
+# This Makefile replicates the file structure in ``$(SRC)`` in
+# ``$(BLD)/$(OUT)``.
+#
+# - Use ``make`` or ``make docs`` to generate HTML files from RST files and
+#   commit the update to the ``$(GHP)`` branch.
+# - Use `make prune` to remove HTML files in ``$(BLD)/$(OUT)`` that lack
+#   corresponding files in `$(SRC)`.
+# - Use `make push` to push `$(GHP)`` branch to GitHub.
+# - Use `make clean` to remove files from ``$(BLD)/$(OUT)``.
+
 SRC := source
 BLD := build
 OUT := docs
@@ -5,8 +16,6 @@ GHP := gh-pages
 GIT := $(BLD)/.git
 STATIC := static
 MSG := "Update docs"
-
-DOCBUILD :=
 
 RST := $(wildcard $(SRC)/*.rst)
 HTML := $(subst $(SRC),$(BLD)/$(OUT),$(RST:.rst=.html))
