@@ -28,7 +28,7 @@ docs : $(GIT) css html
 
 .PHONY : commit
 commit : docs
-	cd $(BLD) && if [[ $$(git status --porcelain --untracked-files=no) ]]; then \
+	cd $(BLD) && if [[ $$(git status --porcelain) ]]; then \
 		git commit -am $(MSG) && git push origin $(GHP); \
 	fi
 
