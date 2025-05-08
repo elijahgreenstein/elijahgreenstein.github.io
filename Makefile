@@ -25,6 +25,9 @@ OUT_CSS := $(subst $(SRC),$(BLD)/$(OUT),$(SRC_CSS))
 
 .PHONY : docs
 docs : $(GIT) css html
+
+.PHONY : commit
+commit : docs
 	cd $(BLD) && git add --all && git commit -m $(MSG) && git push origin $(GHP)
 
 $(GIT) :
