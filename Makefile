@@ -2,12 +2,13 @@
 # This Makefile replicates the file structure in ``$(SRC)`` in
 # ``$(BLD)/$(OUT)``.
 #
-# - Use ``make`` or ``make docs`` to generate HTML files from RST files and
-#   commit the update to the ``$(GHP)`` branch.
-# - Use `make prune` to remove HTML files in ``$(BLD)/$(OUT)`` that lack
-#   corresponding files in `$(SRC)`.
-# - Use `make push` to push `$(GHP)`` branch to GitHub.
-# - Use `make clean` to remove files from ``$(BLD)/$(OUT)``.
+# - Generate HTML files from RST files (and copy any CSS in
+#   ``$(SRC)/$(STATIC)``) with ``make`` or ``make docs``.
+# - Add and commit files in ``build`` with ``make commit``.
+# - Remove HTML files in ``$(BLD)/$(OUT)`` that lack corresponding source files
+#   in ``$(SRC)`` with ``make prune``.
+# - Push ``$(GHP)`` branch to GitHub with ``make push``.
+# - Remove files from ``$(BLD)/$(OUT)`` with ``make clean``.
 
 SRC := source
 BLD := build
@@ -29,6 +30,7 @@ docs : $(GIT) css html
 .PHONY : commit
 commit : docs
 	cd $(BLD) && if [[ $$(git status --porcelain) ]]; then \
+		git status; \
 		git commit -am $(MSG) && git push origin $(GHP); \
 	fi
 
