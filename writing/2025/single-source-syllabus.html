@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>A Single Source Syllabus</title>
+  <link rel="stylesheet" href="../../_static/styles.css">
+  <link rel="stylesheet" href="../../_static/highlight.css">
+</head>
+<body>
+<div id="menu">
+  <div>
+    <a id="home" href="../../index.html">Elijah J. Greenstein</a>
+  </div>
+  <div id="links">
+    <span class="sitelink"><a href="../../writing.html">Writing</a></span>
+    <span class="sitelink"><a href="../../projects.html">Projects</a></span>
+  </div>
+</div>
+<div id="content">
+<div class="meta">
+  <h1 id="title">A Single Source Syllabus</h1>
+  
+  <p class="date">2025-05-14</p>
+  
+</div>
+<div class="body">
+<p>In my teaching, I often produce documents such as course syllabi in several formats. For each course, I typically post an HTML copy of the syllabus on the course website on <a href="https://www.instructure.com/canvas">Canvas LMS</a>; I provide a PDF copy for download and optional printing; and I occasionally distribute a copy as a Microsoft Word docx document to the department office for review. There are some considerations that must be taken into account when preparing a document for these different outputs. The most basic issues centre on titles and headings. To explain these issues, I’ll first explain how <a href="https://pandoc.org">Pandoc</a> produces PDF files from plain text, then I’ll discuss some specifics of Canvas LMS pages, and finally I’ll conclude with a discussion of how to automate document production with <a href="https://www.gnu.org/software/make/">Make</a>.</p>
+<h2 id="pandoc-latex-and-pdf-files">Pandoc, LaTeX, and PDF Files</h2>
+<p>As explained in the <a href="https://pandoc.org/MANUAL.html#creating-a-pdf">user guide</a>, Pandoc creates a PDF from another format by first converting the original document to LaTeX and then using a LaTeX engine to convert the plain text to PDF. <a href="https://www.latex-project.org/get/">LaTeX</a> is software that generates PDF files from plain-text files; authors include LaTeX commands to specify formatting. Emphasized (italicized) and boldface text is marked as follows:</p>
+<div class="highlight"><pre><span></span><span class="k">\emph</span><span class="nb">{</span>This text is in italics.<span class="nb">}</span>
+<span class="k">\textbf</span><span class="nb">{</span>And this text is in boldface.<span class="nb">}</span>
+</pre></div>
+<p>Each LaTeX document requires a document “class,” such as a book or article. For a syllabus, I use the “article” class. A LaTeX article can include a title; subsequent sections of the document are divided into sections, sub-sections, and sub-sub-sections. Sections correspond to level-one Markdown headings; the title corresponds to the title specified in the <a href="https://pandoc.org/MANUAL.html#metadata-blocks">metadata block</a>. When I use Pandoc, I typically opt for the <a href="https://pandoc.org/MANUAL.html#extension-yaml_metadata_block">YAML metadata block</a>. Hence, I might begin a basic syllabus as follows:</p>
+<div class="highlight"><pre><span></span>---
+<span class="gu">title: &quot;ASIA 101 Introduction to Modern Asia&quot;</span>
+<span class="gu">---</span>
+
+<span class="gh"># Course information</span>
+
+<span class="gu">## General information</span>
+
+<span class="k">-</span><span class="w"> </span>Credit value: 3
+<span class="k">-</span><span class="w"> </span>Prerequisites: None
+</pre></div>
+<p>A basic Pandoc command to convert this to LaTeX is:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>pandoc<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>syllabus.tex<span class="w"> </span>syllabus.md
+</pre></div>
+<p>This command includes the <code>-s</code> option to create a “standalone” document. Here is the output (with much of the header removed to focus on the content):</p>
+<div class="highlight"><pre><span></span><span class="k">\title</span><span class="nb">{</span>ASIA 101 Introduction to Modern Asia<span class="nb">}</span>
+<span class="k">\author</span><span class="nb">{}</span>
+<span class="k">\date</span><span class="nb">{}</span>
+
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+<span class="k">\maketitle</span>
+
+<span class="k">\section</span><span class="nb">{</span>Course information<span class="nb">}</span><span class="k">\label</span><span class="nb">{</span>course-information<span class="nb">}</span>
+
+<span class="k">\subsection</span><span class="nb">{</span>General information<span class="nb">}</span><span class="k">\label</span><span class="nb">{</span>general-information<span class="nb">}</span>
+
+<span class="k">\begin</span><span class="nb">{</span>itemize<span class="nb">}</span>
+<span class="k">\tightlist</span>
+<span class="k">\item</span>
+  Credit value: 3
+<span class="k">\item</span>
+  Prerequisites: None
+<span class="k">\end</span><span class="nb">{</span>itemize<span class="nb">}</span>
+
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre></div>
+<p>The document begins after <code>\begin{document}</code>. The LaTeX engine will create the title, author, and date at <code>\maketitle</code>. Note that the level-one Markdown heading, <code># Course Information</code>, is now a section with a label:</p>
+<div class="highlight"><pre><span></span><span class="k">\section</span><span class="nb">{</span>Course information<span class="nb">}</span><span class="k">\label</span><span class="nb">{</span>course-information<span class="nb">}</span>
+</pre></div>
+<p>On its own, this would serve as a satisfactory syllabus. Issues arise, however, when producing an HTML copy.</p>
+<h2 id="pandoc-and-html">Pandoc and HTML</h2>
+<p>Here is a basic command to convert the above Markdown to HTML:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>pandoc<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>syllabus.html<span class="w"> </span>syllabus.md
+</pre></div>
+<p>This results in the following HTML (here I have removed the HTML <code>&lt;head&gt;</code> to show only the body content):</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">header</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;title-block-header&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;title&quot;</span><span class="p">&gt;</span>ASIA 101 Introduction to Modern Asia<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;course-information&quot;</span><span class="p">&gt;</span>Course information<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h2</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;general-information&quot;</span><span class="p">&gt;</span>General information<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Credit value: 3<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Prerequisites: None<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</pre></div>
+<p>Note that Pandoc has rendered both the <code>title</code> from the YAML metadata block and the “Course information” heading as level-one <code>&lt;h1&gt;</code> HTML tags. I would prefer, however, only a single, top-level <code>&lt;h1&gt;</code> tag on the page.</p>
+<p>I also want to transfer the HTML to Canvas LMS to create a course page. Canvas, however, reserves <code>&lt;h1&gt;</code> tags for the title of the page, entered separately from the content of the page. Canvas will convert any <code>&lt;h1&gt;</code> tags entered by users into paragraph <code>&lt;p&gt;</code> tags and adjust the font to a larger size.</p>
+<p>The basic Pandoc commands shown above will not satisfactorily create HTML and PDF copies from the same Markdown source.</p>
+<h2 id="effective-pandoc-options">Effective Pandoc Options</h2>
+<p>Pandoc, however, makes it possible to resolve these issues through various command options and variable settings.</p>
+<p>First, I will move the metadata for the PDF to a separate YAML file, <code>pdf-meta.yaml</code> (here I have also added an author and specified the PDF font):</p>
+<div class="highlight"><pre><span></span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ASIA</span><span class="nv"> </span><span class="s">101</span><span class="nv"> </span><span class="s">Introduction</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">Modern</span><span class="nv"> </span><span class="s">ASIA&quot;</span>
+<span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Dr.</span><span class="nv"> </span><span class="s">Elijah</span><span class="nv"> </span><span class="s">Greenstein&quot;</span>
+<span class="nt">mainfont</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Palatino&quot;</span>
+</pre></div>
+<p>The syllabus itself now begins with:</p>
+<div class="highlight"><pre><span></span><span class="gh"># Course information</span>
+</pre></div>
+<p>Next, I can prepare two different Pandoc commands. The first generates the PDF:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>pandoc<span class="w"> </span>--metadata-file<span class="o">=</span>pdf-meta.yaml<span class="w"> </span>-o<span class="w"> </span>syllabus.pdf<span class="w"> </span>syllabus.md
+</pre></div>
+<p>By including the <code>--metadata-file</code> option, I direct Pandoc to include my YAML file when generating the PDF.</p>
+<p>This second command generates HTML and copies it to my clipboard:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>pandoc<span class="w"> </span>-t<span class="w"> </span>html<span class="w"> </span>--shift-heading-level-by<span class="o">=</span><span class="m">1</span><span class="w"> </span>syllabus.md<span class="w"> </span><span class="p">|</span><span class="w"> </span>pbcopy
+</pre></div>
+<p>Note that I have included <code>--shift-heading-level-by=1</code>. With this option, Pandoc will now shift all of the Markdown headings one level when producing HTML tags. The result is:</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">h2</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;course-information&quot;</span><span class="p">&gt;</span>Course information<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h3</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;general-information&quot;</span><span class="p">&gt;</span>General information<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Credit value: 3<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Prerequisites: None<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</pre></div>
+<p>Note that the “Course information” heading is now marked by a level-two heading tag <code>&lt;h2&gt;</code>. I can now paste the contents of my clipboard into the Canvas HTML text editor and write the title directly into the Canvas GUI.</p>
+<h2 id="how-to-make-multiple-outputs">How to <code>make</code> Multiple Outputs</h2>
+<p>Of course, I don’t want to have to write out these commands each time I revise my syllabus. The solution here is <a href="https://www.gnu.org/software/make/">Make</a>: software used to build other software. Make follows “rules” to create “target” files from “prerequisite” files through command line actions. I won’t discuss Make at length here, but Kieran Healy provides useful discussion in <em><a href="https://plain-text.co/pull-it-together.html#automation-with-make">The Plain Person’s Guide to Plain Text Social Science</a></em>. In short, users specify actions in a <code>Makefile</code>. Here is a rule to generate a PDF from a Markdown file (note that in an actual <code>Makefile</code>, each indentation must use a “tab” character rather than spaces):</p>
+<div class="highlight"><pre><span></span><span class="nf">syllabus.pdf</span><span class="o">:</span><span class="w"> </span><span class="n">syllabus</span>.<span class="n">md</span>
+<span class="w">	</span>pandoc<span class="w"> </span>--metadata-file<span class="o">=</span>pdf-meta.yaml<span class="w"> </span><span class="se">\</span>
+<span class="w">	</span>-o<span class="w"> </span>syllabus.pdf<span class="w"> </span>syllabus.md
+</pre></div>
+<p>Here, <code>syllabus.pdf</code> is the target and <code>syllabus.md</code> is the prerequisite. To use Make, set the working directory of the terminal to the directory containing the <code>Makefile</code> and enter <code>make</code> on the command line. Critically, Make will only execute the action under two conditions:</p>
+<ol>
+<li>the target file does not exist or</li>
+<li>the modification time of the dependency file is <em>after</em> that of the target file.</li>
+</ol>
+<p>Any time I revise <code>syllabus.md</code>, I can use the <code>make</code> command to generate a new PDF. I can also add a rule to generate an HTML copy:</p>
+<div class="highlight"><pre><span></span><span class="nf">syllabus.html</span><span class="o">:</span><span class="w"> </span><span class="n">syllabus</span>.<span class="n">md</span>
+<span class="w">	</span>pandoc<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span><span class="w"> </span>$&lt;
+<span class="w">	</span>cat<span class="w"> </span><span class="nv">$@</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>pbcopy
+</pre></div>
+<p>Here I have also used two automatic variables to simplify the rule: <code>$&lt;</code> refers to the first prerequisite (<code>syllabus.html</code>) and <code>$@</code> refers to the target file.</p>
+<p>Note that under this rule, Make first generates a local HTML copy with Pandoc; then it uses the <code>cat</code> command to read the HTML file and copy its contents to the clipboard with <code>pbcopy</code>.</p>
+<p>The command <code>make</code> will only create the first “target” in the file. In order to create both copies of the syllabus at once, I include a “phony” target, <code>syllabus</code>, that has two prerequisites: the PDF version and the PDF copy. Here is a full example <code>Makefile</code> (note the use of automatic variables for the PDF rule, too):</p>
+<div class="highlight"><pre><span></span><span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="n">syllabus</span>
+<span class="nf">syllabus</span><span class="o">:</span><span class="w"> </span><span class="n">syllabus</span>.<span class="n">pdf</span> <span class="n">syllabus</span>.<span class="n">html</span>
+
+<span class="nf">syllabus.pdf</span><span class="o">:</span><span class="w"> </span><span class="n">syllabus</span>.<span class="n">md</span> <span class="n">pdf</span>-<span class="n">meta</span>.<span class="n">yaml</span>
+<span class="w">	</span>pandoc<span class="w"> </span>--metadata-file<span class="o">=</span>pdf-meta.yaml<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span><span class="w"> </span>$&lt;
+
+<span class="nf">syllabus.html</span><span class="o">:</span><span class="w"> </span><span class="n">syllabus</span>.<span class="n">md</span>
+<span class="w">	</span>pandoc<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span><span class="w"> </span>$&lt;
+<span class="w">	</span>cat<span class="w"> </span><span class="nv">$@</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>pbcopy
+</pre></div>
+<p>With this <code>Makefile</code>, when I enter <code>make</code> or <code>make syllabus</code> on the command line, Make</p>
+<ol>
+<li>generates a PDF copy of my syllabus with Pandoc,</li>
+<li>generates an HTML copy of my syllabus with Pandoc, and</li>
+<li>copies the contents of the HTML copy to my clipboard (which I can paste into the syllabus page on Canvas).</li>
+</ol>
+<h2 id="from-a-single-source">From a Single Source</h2>
+<p>As described above, Pandoc and Make facilitate the generation of documents in multiple formats from a single plain-text source. It is simple to add additional directives to the <code>Makefile</code> as needed, such as a rule to create a Microsoft Word version of the syllabus. Writing the syllabus itself in a single file ensures that output files share common content regardless of the format. Automation with Make, moreover, both simplifies document generation (a command of only a single word, <code>make</code>, is needed) and guarantees that documents are consistently generated with each revision.</p>
+</div>
+</div>
+</body>
+</html>

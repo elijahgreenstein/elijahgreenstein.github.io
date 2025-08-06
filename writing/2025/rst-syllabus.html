@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>How to Structure reStructuredText for Quick Updates</title>
+  <link rel="stylesheet" href="../../_static/styles.css">
+  <link rel="stylesheet" href="../../_static/highlight.css">
+</head>
+<body>
+<div id="menu">
+  <div>
+    <a id="home" href="../../index.html">Elijah J. Greenstein</a>
+  </div>
+  <div id="links">
+    <span class="sitelink"><a href="../../writing.html">Writing</a></span>
+    <span class="sitelink"><a href="../../projects.html">Projects</a></span>
+  </div>
+</div>
+<div id="content">
+<div class="meta">
+  <h1 id="title">How to Structure reStructuredText for Quick Updates</h1>
+  
+  <p class="date">2025-05-20</p>
+  
+</div>
+<div class="body">
+<p>The reStructuredText support for <a href="https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#substitution-definitions" title="reStructuredText Markup Specification">text substitutions</a> offers a simple way to manage periodic updates to a body of documents. Consider a project with multiple documents that reference a shared set of details such as locations, dates, and times. It would be a time-consuming and possibly error-prone process to change each document every time a detail changed. Text substitutions, however, make it possible to centralize the content of a detail (the actual location or date) in a single file. A single edit to that file and rebuild of project documents is now all that is necessary to update project details.</p>
+<h2 id="restructuredtext-substitutions">reStructuredText Substitutions</h2>
+<p>A reStructuredText in-line substitution is simple—we place substitution text between vertical line <code>|</code> characters to create a <a href="https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#substitution-references" title="reStructuredText Markup Specification">substitution reference</a> and then use the <a href="https://docutils.sourceforge.io/docs/ref/rst/directives.html#replacement-text" title="reStructuredText Directives"><code>replace</code> directive</a> to create a substitution definition:</p>
+<div class="highlight"><pre><span></span>Here is some |substitution text|.
+
+<span class="p">..</span> <span class="nt">|substitution text|</span> <span class="ow">replace</span><span class="p">::</span> substituted text
+</pre></div>
+<p><a href="https://docutils.sourceforge.io" title="Docutils: Documentation Utilities">Docutils</a> processes this into:</p>
+<blockquote>
+<p>Here is some substituted text.</p>
+</blockquote>
+<h2 id="a-syllabus-example">A Syllabus Example</h2>
+<p>As a teacher, some of the documents that I update most frequently are my course syllabi and home pages. These often include details about the course such as:</p>
+<ol>
+<li>The course code</li>
+<li>My contact information</li>
+<li>My office location and office hours</li>
+<li>Important course links</li>
+<li>Links to useful resources</li>
+<li>Class meeting times</li>
+<li>The classroom</li>
+</ol>
+<p>Some of these details change every term, such as the class meeting times and the classroom. Some change occasionally, such as useful resources. Still others change only infrequently, such as the course code or my email. reStructuredText substitution references are so simple, however, that I might use them even for the course code or my email to hedge, for example, against cases in which I might teach a course at a different institution.</p>
+<p>Below are a set of examples to illustrate how to use reStructuredText substitutions to prepare a syllabus (<code>syllabus.rst</code>) and home page (<code>home.rst</code>) with substitution definitions and <a href="https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#hyperlink-targets" title="reStructuredText Markup Specification">hyperlink targets</a> centralized on a separate page (<code>subst.rst</code>). The savvy reader might also notice the use of <a href="https://docutils.sourceforge.io/docs/ref/rst/directives.html#list-table" title="reStructuredText Directives">list tables</a> to prepare simple tables.</p>
+<h3 id="example-syllabus">Example Syllabus</h3>
+<div class="highlight"><pre><span></span><span class="gh">|course_code| Syllabus</span>
+<span class="gh">======================</span>
+
+<span class="gh">Course Information</span>
+<span class="gh">------------------</span>
+
+<span class="gh">Communication</span>
+<span class="gh">^^^^^^^^^^^^^</span>
+
+<span class="p">..</span> <span class="ow">list-table</span><span class="p">::</span>
+   <span class="nc">:widths:</span> 50 50
+   <span class="nc">:header-rows:</span> 1
+
+   <span class="m">*</span> - Contact information
+     <span class="m">-</span> Office hours
+   <span class="m">*</span> - * Email: |email|_
+       <span class="m">*</span> |forum|_
+     <span class="m">-</span> * |office hours|
+       <span class="m">*</span> |office|
+
+<span class="gh">Course Format</span>
+<span class="gh">^^^^^^^^^^^^^</span>
+
+<span class="p">..</span> <span class="ow">list-table</span><span class="p">::</span>
+   <span class="nc">:widths:</span> 30 40 30
+
+   <span class="m">*</span> - |format|
+     <span class="m">-</span> |class time|
+     <span class="m">-</span> |classroom|_
+
+<span class="gh">Learning Resources</span>
+<span class="gh">------------------</span>
+
+<span class="m">*</span> |documentation|_
+<span class="m">*</span> |primer|_
+
+<span class="p">..</span> <span class="ow">include</span><span class="p">::</span> subst.rst
+</pre></div>
+<h3 id="example-home-page">Example Home Page</h3>
+<div class="highlight"><pre><span></span><span class="gh">Welcome to |course_code|: Introduction to ``rst``!</span>
+<span class="gh">==================================================</span>
+
+<span class="p">..</span> <span class="ow">list-table</span><span class="p">::</span>
+   <span class="nc">:widths:</span> 50 50
+   <span class="nc">:header-rows:</span> 1
+
+   <span class="m">*</span> - Instructor contact
+     <span class="m">-</span> Learning resources
+   <span class="m">*</span> - * Email: |email|_
+       <span class="m">*</span> Office hours:
+
+         <span class="m">*</span> |office hours|
+         <span class="m">*</span> |office|
+     <span class="m">-</span> * |documentation|_
+       <span class="m">*</span> |primer|_
+
+<span class="p">..</span> <span class="ow">include</span><span class="p">::</span> subst.rst
+</pre></div>
+<h3 id="example-substitution-file">Example Substitution File</h3>
+<div class="highlight"><pre><span></span><span class="p">..</span> <span class="nt">_classroom:</span> classroom/information/page
+<span class="p">..</span> <span class="nt">_documentation:</span> https://docutils.sourceforge.io/docs/index.html
+<span class="p">..</span> <span class="nt">_forum:</span> course/page/forum
+<span class="p">..</span> <span class="nt">_primer:</span> https://docutils.sourceforge.io/docs/user/rst/quickstart.html
+
+<span class="p">..</span> <span class="nt">|class time|</span> <span class="ow">replace</span><span class="p">::</span> MWF 11:00 AM -- 12:00 PM
+<span class="p">..</span> <span class="nt">|classroom|</span> <span class="ow">replace</span><span class="p">::</span> A Building, Room 202
+<span class="p">..</span> <span class="nt">|course_code|</span> <span class="ow">replace</span><span class="p">::</span> RST101
+<span class="p">..</span> <span class="nt">|documentation|</span> <span class="ow">replace</span><span class="p">::</span> Docutils Project Documentation Overview
+<span class="p">..</span> <span class="nt">|email|</span> <span class="ow">replace</span><span class="p">::</span> email@address
+<span class="p">..</span> <span class="nt">|format|</span> <span class="ow">replace</span><span class="p">::</span> In-person
+<span class="p">..</span> <span class="nt">|forum|</span> <span class="ow">replace</span><span class="p">::</span> General discussion board
+<span class="p">..</span> <span class="nt">|office hours|</span> <span class="ow">replace</span><span class="p">::</span> Mondays 12:00 PM -- 1:00 PM
+<span class="p">..</span> <span class="nt">|office|</span> <span class="ow">replace</span><span class="p">::</span> Another Building, Room 101
+<span class="p">..</span> <span class="nt">|primer|</span> <span class="ow">replace</span><span class="p">::</span> A ReStructuredText Primer
+</pre></div>
+<h3 id="putting-it-all-together">Putting It All Together</h3>
+<p>A few things to notice:</p>
+<ul>
+<li>Both <code>syllabus.rst</code> and <code>home.rst</code> contain an <a href="https://docutils.sourceforge.io/docs/ref/rst/directives.html#including-an-external-document-fragment" title="reStructuredText Directives"><code>include</code> directive</a> that directs the reStructuredText processor (i.e. <a href="https://docutils.sourceforge.io" title="Docutils: Documentation Utilities">Docutils</a>) to include the contents of <code>subst.rst</code>.</li>
+<li>Some of the in-line substitution references are also hyperlink references (e.g. <code>|documentation|_</code>). Hence, they require both a hyperlink target and a substitution definition in <code>subst.rst</code>.</li>
+<li>Docutils will replace <code>|email|</code> with <code>email@address</code>. Since <code>email@address</code> is a <a href="https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#standalone-hyperlinks" title="reStructuredText Markup Specification">standalone hyperlink</a>, the substitution reference <code>|email|</code> does not require a hyperlink reference (namely, <code>|email|_</code>). Docutils will render the standalone <code>email@address</code> as a hyperlink to <code>mailto:email@address</code>.</li>
+<li>I have separated the hyperlink references and substitution definitions in <code>subst.rst</code> and organized them alphabetically. This makes it easy to review and update hyperlinks and/or substitution text.</li>
+</ul>
+<p>We can now easily generate HTML from our source files:</p>
+<pre><code>rst2html5 syllabus.rst syllabus.html
+rst2html5 home.rst home.html
+</code></pre><p>I’ll leave it to the reader to generate these results separately. Suffice to say that Docutils makes all specified substitutions; <code>|office hours|</code>, for example, becomes “Mondays 12:00 PM – 1:00 PM.”</p>
+<p>At the start of a new term, it is now easy to update key details with a simple edit to <code>subst.rst</code> alone. Of course, more substantial revisions to the syllabus, such as a change to the course description or assessments, require editing that file directly.</p>
+</div>
+</div>
+</body>
+</html>

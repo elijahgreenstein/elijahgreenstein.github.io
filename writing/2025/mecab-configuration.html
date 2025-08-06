@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Some Notes on Configuring MeCab</title>
+  <link rel="stylesheet" href="../../_static/styles.css">
+  <link rel="stylesheet" href="../../_static/highlight.css">
+</head>
+<body>
+<div id="menu">
+  <div>
+    <a id="home" href="../../index.html">Elijah J. Greenstein</a>
+  </div>
+  <div id="links">
+    <span class="sitelink"><a href="../../writing.html">Writing</a></span>
+    <span class="sitelink"><a href="../../projects.html">Projects</a></span>
+  </div>
+</div>
+<div id="content">
+<div class="meta">
+  <h1 id="title">Some Notes on Configuring MeCab</h1>
+  
+  <p class="date">2025-07-08</p>
+  
+</div>
+<div class="body">
+<p>I recently had occasion to install <a href="https://taku910.github.io/mecab/">MeCab</a>, the Japanese text tokenizer and part of speech tagger, on a new Mac. In the past, I followed Mark Ravina’s <a href="https://laits.utexas.edu/~mr56267/Japanese_Text_Mining/MeCab_RMeCab.html#installing-on-mac">guide to installing MeCab on a Mac</a>, but this time I followed a slightly different process (namely, I did not find it necessary to get write privileges on <code>/usr/local</code> and I chose to clone the code from <code>git</code> rather than download the zipped archive of the source code).</p>
+<p>Below I provide an overview of the installation process, as well as an example of how I configured MeCab for a custom output format.</p>
+<h2 id="installation">Installation</h2>
+<p>Installation instructions are available on the MeCab <a href="https://taku910.github.io/mecab/">home page</a>, but I chose to work with the GitHub repository itself.</p>
+<p>First, I cloned the repository:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/taku910/mecab.git
+</pre></div>
+<p>Then, I changed into the <code>mecab</code> subdirectory of the repository:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>mecab/mecab/
+</pre></div>
+<p>Installation instructions are detailed in <code>INSTALL</code>, and basically follow the <a href="https://taku910.github.io/mecab/#install-unix">UNIX installation</a> instructions on the MeCab home page. To ensure that MeCab used UTF-8 encoding, I included the <code>--with-charset=utf8</code> option to configure the Makefile:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>./configure<span class="w"> </span>--with-charset<span class="o">=</span>utf8
+<span class="gp">$ </span>make<span class="w"> </span>check
+<span class="gp">$ </span>sudo<span class="w"> </span>make<span class="w"> </span>install
+</pre></div>
+<p>This installs <code>mecab</code> into <code>/usr/local/bin</code> and creates a configuration file, <code>/usr/local/etc/mecabrc</code>. More on the configuration file in a moment.</p>
+<p>MeCab also requires a dictionary. For this step, I changed into the IPADic directory in the repository:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>../mecab-ipadic/
+</pre></div>
+<p>Installation instructions are, again, detailed in <code>INSTALL</code>. Once again, I set character encoding to UTF-8:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>./configure<span class="w"> </span>--with-charset<span class="o">=</span>utf8
+<span class="gp">$ </span>make<span class="w"> </span>check
+<span class="gp">$ </span>sudo<span class="w"> </span>make<span class="w"> </span>install
+</pre></div>
+<p>This installs the IPADic dictionary into <code>/usr/local/lib/mecab/dic/ipadic</code>. Basic MeCab usage is detailed on the <a href="https://taku910.github.io/mecab/#usage-tools">Mecab home page</a>.</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>mecab
+<span class="go">すもももももももものうち</span>
+</pre></div>
+<p>This should output:</p>
+<div class="highlight"><pre><span></span><span class="go">すもも  名詞,一般,*,*,*,*,すもも,スモモ,スモモ</span>
+<span class="go">も      助詞,係助詞,*,*,*,*,も,モ,モ</span>
+<span class="go">もも    名詞,一般,*,*,*,*,もも,モモ,モモ</span>
+<span class="go">も      助詞,係助詞,*,*,*,*,も,モ,モ</span>
+<span class="go">もも    名詞,一般,*,*,*,*,もも,モモ,モモ</span>
+<span class="go">の      助詞,連体化,*,*,*,*,の,ノ,ノ</span>
+<span class="go">うち    名詞,非自立,副詞可能,*,*,*,うち,ウチ,ウチ</span>
+<span class="go">EOS</span>
+</pre></div>
+<h2 id="additional-dictionaries">Additional Dictionaries</h2>
+<p>The <a href="https://www.ninjal.ac.jp">National Institute for Japanese Language and Linguistics</a> also offers the more specialized “<a href="https://clrd.ninjal.ac.jp/unidic/">Unidic</a>” dictionaries. First, I installed <a href="https://clrd.ninjal.ac.jp/unidic/download.html#unidic_bccwj">“Unidic for Contemporary Written Japanese” (現代書き言葉)</a>.</p>
+<p>To download the dictionary (<code>unidic-cwj-202302</code>), click the download button (ライセンスに同意して最新版をダウンロード [agree to the license and download newest version]). Move <code>unidic-cwj-202302</code> and its contents from the <code>Downloads</code> directory to the directory of MeCab dictionaries, <code>/usr/local/lib/mecab/dic</code>. To open the dictionary directory, simply enter:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>open<span class="w"> </span>/usr/local/lib/mecab/dic
+</pre></div>
+<p>I often work with Meiji, Taishō, and early Shōwa documents, so I also installed the <a href="https://clrd.ninjal.ac.jp/unidic/download_all.html#unidic_kindai">“Modern Literary UniDic” (近代文語UniDic)</a>.</p>
+<p>Once again, use the link to download a directory (<code>unidic-kindai-bungo</code>), and then move the directory to <code>/usr/local/lib/mecab/dic</code>.</p>
+<h2 id="dictionary-configuration">Dictionary Configuration</h2>
+<p>The default configuration file for MeCab is <code>/usr/local/etc/mecabrc</code>. Most lines are comments that begin with a semi-colon character (<code>;</code>). The dictionary directory is set as follows:</p>
+<pre><code>dicdir =  /usr/local/lib/mecab/dic/ipadic
+</code></pre><p>We can check the dictionary used by MeCab with the <code>-D</code> option:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>mecab<span class="w"> </span>-D
+</pre></div>
+<p>The <code>filename</code> should be <code>/usr/local/lib/mecab/dic/ipadic/sys.dic</code>.</p>
+<p>To use a different dictionary, we need to specify a different directory. We can do so by creating our own configuration file in our home directory. Change into the home directory and open a new configuration file, <code>.mecabrc</code>, with Vim:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>~<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>vim<span class="w"> </span>.mecabrc
+</pre></div>
+<p>We can specify a different dictionary directory here (note that the first line is a comment):</p>
+<pre><code>; MeCab configuration file
+dicdir = /usr/local/lib/mecab/dic/unidic-cwj-202302
+</code></pre><p>Now, <code>mecab -D</code> should output a <code>filename</code> that corresponds to the directory containing the “Unidic for Contemporary Written Japanese.”</p>
+<h2 id="output-format">Output Format</h2>
+<p>There are a number of ways to interact with MeCab, such as the <a href="https://github.com/IshidaMotohiro/RMeCab">RMeCab library</a> for R and the <a href="https://github.com/polm/fugashi">Fugashi library</a> for Python. For my purposes, I often want to tokenize a batch of documents all at once, and then do some exploratory analysis. For this, I find that it is simpler to configure MeCab to produce CSV files, and then load the CSV files as data frames in Python or R.</p>
+<p>The default UniDic output is lengthy. For example:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>mecab
+<span class="go">すもももももももものうち</span>
+</pre></div>
+<p>produces:</p>
+<div class="highlight"><pre><span></span><span class="go">すもも	名詞,普通名詞,一般,*,*,*,スモモ,李,すもも,スモモ,すもも,スモモ,和,*,*,*,*,*,*,体,スモモ,スモモ,スモモ,スモモ,0,C2,*,15660352771596800,56972</span>
+<span class="go">も	助詞,係助詞,*,*,*,*,モ,も,も,モ,も,モ,和,*,*,*,*,*,*,係助,モ,モ,モ,モ,*,&quot;動詞%F2@-1,形容詞%F4@-2,名詞%F1&quot;,*,10324972564259328,37562</span>
+<span class="go">もも	名詞,普通名詞,一般,*,*,*,モモ,桃,もも,モモ,もも,モモ,和,*,*,*,*,*,*,体,モモ,モモ,モモ,モモ,0,C3,*,10425303000293888,37927</span>
+<span class="go">も	助詞,係助詞,*,*,*,*,モ,も,も,モ,も,モ,和,*,*,*,*,*,*,係助,モ,モ,モ,モ,*,&quot;動詞%F2@-1,形容詞%F4@-2,名詞%F1&quot;,*,10324972564259328,37562</span>
+<span class="go">もも	名詞,普通名詞,一般,*,*,*,モモ,桃,もも,モモ,もも,モモ,和,*,*,*,*,*,*,体,モモ,モモ,モモ,モモ,0,C3,*,10425303000293888,37927</span>
+<span class="go">の	助詞,格助詞,*,*,*,*,ノ,の,の,ノ,の,ノ,和,*,*,*,*,*,*,格助,ノ,ノ,ノ,ノ,*,名詞%F1,*,7968444268028416,28989</span>
+<span class="go">うち	名詞,普通名詞,副詞可能,*,*,*,ウチ,内,うち,ウチ,うち,ウチ,和,*,*,チ促,基本形,*,*,体,ウチ,ウチ,ウチ,ウチ,0,C3,*,881267193291264,3206</span>
+<span class="go">EOS</span>
+</pre></div>
+<p>The token is followed by a tab character; part-of-speech and morphological details that follow are separated by commas.</p>
+<p>The MeCab documentation details how to <a href="https://taku910.github.io/mecab/format.html">set the output format</a>. I generally want the token, the lemma, the lemma reading, and any part of speech information. I also want to know if the token was marked as known or “unknown” (“UNK”, “未知語形態素”), and I want to mark new lines (“EOS”). To do so, I set the following “keys” for the “node”, “unk”, and “eos” format in my <code>.mecabrc</code> configuration file:</p>
+<pre><code>node-format-basic = %m,%f[7],%f[6],%f[0],%f[1],%f[2],%f[3],1\n
+unk-format-basic = %m,%m,%m,%f[0],%f[1],%f[2],%f[3],0\n
+eos-format-basic = EOS,,,,,,,2\n
+</code></pre><p>Note that each key is appended with <code>basic</code>. We can now produce output with those fields by invoking <code>mecab</code> with the <code>-O</code> flag set to <code>basic</code>:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>mecab<span class="w"> </span>-Obasic
+<span class="go">すもももももももものうち</span>
+</pre></div>
+<p>This produces:</p>
+<div class="highlight"><pre><span></span><span class="go">すもも,李,スモモ,名詞,普通名詞,一般,,1</span>
+<span class="go">も,も,モ,助詞,係助詞,,,1</span>
+<span class="go">もも,桃,モモ,名詞,普通名詞,一般,,1</span>
+<span class="go">も,も,モ,助詞,係助詞,,,1</span>
+<span class="go">もも,桃,モモ,名詞,普通名詞,一般,,1</span>
+<span class="go">の,の,ノ,助詞,格助詞,,,1</span>
+<span class="go">うち,内,ウチ,名詞,普通名詞,副詞可能,,1</span>
+<span class="go">EOS,,,,,,,2</span>
+</pre></div>
+<p>Each line now has eight fields:</p>
+<ol>
+<li>Original token (<code>%m</code>)</li>
+<li>Lemma (<code>%f[7]</code>)</li>
+<li>Lemma reading (<code>%f[6]</code>)</li>
+<li>Part of speech, field 1 (<code>%f[0]</code>)</li>
+<li>Part of speech, field 2 (<code>%f[1]</code>)</li>
+<li>Part of speech, field 3 (<code>%f[2]</code>)</li>
+<li>Part of speech, field 4 (<code>%f[3]</code>)</li>
+<li>“Known” token (<code>1</code>), “unknown” token (<code>0</code>), “end of string” (<code>2</code>).</li>
+</ol>
+<p>It is now easy to create CSV files of tokenized text, with part-of-speech information. Let’s say we have a Japanese text file, <code>maihime.txt</code>. We can produce a CSV file of tokens with:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>mecab<span class="w"> </span>-Obasic<span class="w"> </span>maihime.txt<span class="w"> </span>&gt;<span class="w"> </span>maihime.csv
+</pre></div>
+<p>Likewise, we can process an entire directory of files, <code>texts</code>, and write the tokenized output to CSV files in <code>tokens</code> with a simple <code>for</code> loop:</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span><span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span>texts/*.txt<span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="gp">&gt; </span><span class="k">do</span><span class="w"> </span><span class="se">\</span>
+<span class="gp">&gt; </span><span class="nv">filename</span><span class="o">=</span><span class="si">${</span><span class="nv">file</span><span class="p">%.txt</span><span class="si">}</span><span class="w"> </span><span class="se">\</span>
+<span class="gp">&gt; </span><span class="nv">output</span><span class="o">=</span>tokens/<span class="si">${</span><span class="nv">filename</span><span class="p">##*/</span><span class="si">}</span>.csv<span class="w"> </span><span class="se">\</span>
+<span class="gp">&gt; </span>mecab<span class="w"> </span>-Obasic<span class="w"> </span><span class="si">${</span><span class="nv">file</span><span class="si">}</span><span class="w"> </span>&gt;<span class="w"> </span><span class="si">${</span><span class="nv">output</span><span class="si">}</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="gp">&gt; </span><span class="k">done</span>
+</pre></div>
+<p>Note that this can create problems if the text contains comma characters (<code>,</code>) ; the comma token will appear to have additional fields separated by the token itself. To prevent this, a simple <code>sed</code> command can replace all ASCII comma characters (<code>,</code>) with CJK comma characters (<code>、</code>):</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="s1">&#39;s/,/、/g;&#39;</span><span class="w"> </span>FILE.txt
+</pre></div>
+<p>Likewise, text that contains double quotes characters (<code>&quot;</code>) can pose a problem when reading the output CSV file. We can similarly replace these with CJK double quotes characters (<code>”</code>):</p>
+<div class="highlight"><pre><span></span><span class="gp">$ </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="s1">&#39;s/&quot;/”/g;&#39;</span><span class="w"> </span>FILE.txt
+</pre></div>
+<p>Other fields can be specified as found under “出力フォーマット” (output format) in the <a href="https://taku910.github.io/mecab/format.html">documentation</a>. Note that <code>%f</code> and <code>%F</code> specify certain features. The list of features by field number is available in the <a href="https://clrd.ninjal.ac.jp/unidic/faq.html">Unidic FAQ</a>, as are <a href="https://clrd.ninjal.ac.jp/unidic/faq.html#col_name">Japanese versions of the field codes</a>. Paul O’Leary McCann, author of the <a href="https://github.com/polm/fugashi">Fugashi</a> Python package, provides an English-language overview of the fields in the <code>README</code> for his <a href="https://github.com/polm/unidic-py">unidic-py</a> package.</p>
+</div>
+</div>
+</body>
+</html>
