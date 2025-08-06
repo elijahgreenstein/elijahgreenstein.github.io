@@ -4,8 +4,28 @@
   <meta charset="UTF-8">
   <title>{{ title }}</title>
   <link rel="stylesheet" href="{{ ROOT }}/_static/styles.css">
+  <link rel="stylesheet" href="{{ ROOT }}/_static/highlight.css">
 </head>
 <body>
+<div id="menu">
+  <div>
+    <a id="home" href="{{ ROOT }}/index.html">Elijah J. Greenstein</a>
+  </div>
+  <div id="links">
+    <span class="sitelink"><a href="{{ ROOT }}/writing.html">Writing</a></span>
+    <span class="sitelink"><a href="{{ ROOT }}/projects.html">Projects</a></span>
+  </div>
+</div>
+<div id="content">
+<div class="meta">
+  <h1 id="title">{{ title }}</h1>
+  {% if date %}
+  <p class="date">{{ date }}</p>
+  {% endif %}
+</div>
+<div class="body">
 {{ BODY }}
+</div>
+</div>
 </body>
 </html>
