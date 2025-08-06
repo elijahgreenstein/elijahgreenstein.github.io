@@ -1,0 +1,9 @@
+build: _build
+ignore:
+- _build
+source: .
+static_ext:
+- .css
+- .js
+- .jpg
+- .png
