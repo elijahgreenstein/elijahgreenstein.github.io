@@ -1,1 +1,0 @@
-# elijahgreenstein.github.io
