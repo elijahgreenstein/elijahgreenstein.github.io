@@ -8,14 +8,13 @@ I am endlessly fascinated by languages, both natural and otherwise. My core rese
 
 I enjoy making and customizing open-source tools, particularly for use when writing. I've written about these tools [on this site][ejg-writing], and my open source projects are [available on GitHub][ejg-gh]. My current go-to writing tools are [Vim][vim], Markdown ([CommonMark][cm] and [Pandoc][pandoc-md]), and reStructuredText ([Docutils][docutils] and [Sphinx][sphinx]). I also use [LaTeX][latex] (typically LuaLaTeX) for polished PDFs or when I'm writing something heavy on mathematics.
 
-[cm]: https://commonmark.org/
-[docutils]: https://www.docutils.org/
-[ejg-diss]: https://dataspace.princeton.edu/handle/88435/dsp016d570048z
-[ejg-gh]: https://github.com/elijahgreenstein
-[ejg-writing]: ./writing.html
-[latex]: https://www.latex-project.org/
-[mit-sds]: https://micromasters.mit.edu/ds/
-[pandoc-md]: https://pandoc.org/MANUAL.html#pandocs-markdown
-[sphinx]: https://www.sphinx-doc.org/en/master/
-[vim]: https://www.vim.org/
+[cm]: https://commonmark.org/ "CommonMark"
+[docutils]: https://www.docutils.org/ "Docutils"
+[ejg-diss]: https://dataspace.princeton.edu/handle/88435/dsp016d570048z "DataSpace: Princeton University Doctoral Dissertations"
+[ejg-gh]: https://github.com/elijahgreenstein "Elijah Greenstein GitHub account"
+[ejg-writing]: ./writing.html "Writing"
+[latex]: https://www.latex-project.org/ "LaTeX Project"
+[pandoc-md]: https://pandoc.org/MANUAL.html#pandocs-markdown "Pandoc's Markdown"
+[sphinx]: https://www.sphinx-doc.org/en/master/ "Sphinx"
+[vim]: https://www.vim.org/ "Vim"
 

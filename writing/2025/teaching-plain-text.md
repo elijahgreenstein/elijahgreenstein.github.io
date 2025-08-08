@@ -158,20 +158,20 @@ Command on the second line:
 - `exe s:cmd ` executes the command discussed above.
 - `redraw!` instructs Vim to clear and redraw the screen. (Execution of the shell command sometimes disrupts the appearance of the text editor; this resets the appearance.)
 
-[canvas-rich]: https://community.canvaslms.com/t5/Canvas-Basics-Guide/What-is-the-Rich-Content-Editor-RCE/ta-p/12
-[canvas]: https://www.instructure.com/canvas
-[commonmark]: https://commonmark.org
-[gruber]: https://daringfireball.net/projects/markdown/syntax
-[latex]: https://www.latex-project.org/
-[latex-links]: https://www.latex-project.org/help/links/
-[latex-short]: https://ctan.mirror.rafal.ca/info/lshort/english/lshort.pdf
-[latex-unofficial]: https://ctan.org/pkg/latex2e-help-texinfo
-[vimscript]: https://learnvimscriptthehardway.stevelosh.com
-[libre]: https://www.libreoffice.org
-[md]: https://daringfireball.net/projects/markdown/
-[pandoc-md-variants]: https://pandoc.org/MANUAL.html#markdown-variants
-[pandoc-md]: https://pandoc.org/MANUAL.html#pandocs-markdown
-[pandoc]: https://pandoc.org
-[plain]: https://plain-text.co/write-and-edit.html#write-and-edit
-[vim]: https://www.vim.org
+[canvas-rich]: https://community.canvaslms.com/t5/Canvas-Basics-Guide/What-is-the-Rich-Content-Editor-RCE/ta-p/12 "Canvas Basics Guide: Rich content editor"
+[canvas]: https://www.instructure.com/canvas "Canvas by Instructure"
+[commonmark]: https://commonmark.org "CommonMark"
+[gruber]: https://daringfireball.net/projects/markdown/syntax "Markdown: Syntax"
+[latex-links]: https://www.latex-project.org/help/links/ "LaTeX Project: Useful Links"
+[latex-short]: https://ctan.mirror.rafal.ca/info/lshort/english/lshort.pdf "The (Not So) Short Introduction to LaTeX2e"
+[latex-unofficial]: https://ctan.org/pkg/latex2e-help-texinfo "LATEX2e: An unofficial reference manual"
+[latex]: https://www.latex-project.org/ "LaTeX Project"
+[libre]: https://www.libreoffice.org "LibreOffice"
+[md]: https://daringfireball.net/projects/markdown/ "Markdown"
+[pandoc-md-variants]: https://pandoc.org/MANUAL.html#markdown-variants "Pandoc User's Guide: Markdown variants"
+[pandoc-md]: https://pandoc.org/MANUAL.html#pandocs-markdown "Pandoc User's Guide: Pandoc's markdown"
+[pandoc]: https://pandoc.org "Pandoc"
+[plain]: https://plain-text.co/write-and-edit.html#write-and-edit "The Plain Person's Guide to Plain Text Social Science: Write and edit"
+[vim]: https://www.vim.org "Vim"
+[vimscript]: https://learnvimscriptthehardway.stevelosh.com "Learn Vimsceript the Hard Way"
 

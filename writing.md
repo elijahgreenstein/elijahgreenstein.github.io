@@ -20,9 +20,9 @@ title: Writing
 - My [Ph.D. dissertation][ejg-diss] (Princeton University, 2019) examines Japan's emergence as a global shipping power in the nineteenth and twentieth centuries.
 
 
-[clt-doc]: https://elijahgreenstein.github.io/command-line-teaching/
-[diataxis]: https://diataxis.fr/
-[ejg-diss]: https://dataspace.princeton.edu/handle/88435/dsp016d570048z
-[jpn-la]: https://uhpress.hawaii.edu/title/the-japanese-empire-and-latin-america/
-[pykari-doc]: https://elijahgreenstein.github.io/pykari/
-[sphinx]: https://www.sphinx-doc.org/en/master/
+[clt-doc]: https://elijahgreenstein.github.io/command-line-teaching/ "Command Line Teaching documentation"
+[diataxis]: https://diataxis.fr/ "Diátaxis"
+[ejg-diss]: https://dataspace.princeton.edu/handle/88435/dsp016d570048z "DataSpace: Princeton University Doctoral Dissertations"
+[jpn-la]: https://uhpress.hawaii.edu/title/the-japanese-empire-and-latin-america/ "University of Hawaii Press: The Japanese Empire and Latin America"
+[pykari-doc]: https://elijahgreenstein.github.io/pykari/ "Pykari documentation"
+[sphinx]: https://www.sphinx-doc.org/en/master/ "Sphinx"

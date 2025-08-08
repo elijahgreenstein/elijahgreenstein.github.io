@@ -17,6 +17,6 @@ An examination of public discussion of economic affairs through the analysis of 
 - [Command Line Teaching][clt] is a toolkit that I wrote in Python to streamline the upload of course materials to [Canvas LMS][canvas].
 - [Pykari][pykari] is a simple static site generator that I wrote in Python. (I use it to build this website!)
 
-[clt]: https://elijahgreenstein.github.io/command-line-teaching/
-[canvas]: https://www.instructure.com/canvas
-[pykari]: https://github.com/elijahgreenstein/pykari
+[clt]: https://github.com/elijahgreenstein/command-line-teaching "Command Line Teaching GitHub page"
+[canvas]: https://www.instructure.com/canvas "Canvas by Instructure"
+[pykari]: https://github.com/elijahgreenstein/pykari "Pykari GitHub page"

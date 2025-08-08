@@ -198,13 +198,13 @@ With this `Makefile`, when I enter `make` or `make syllabus` on the command line
 
 As described above, Pandoc and Make facilitate the generation of documents in multiple formats from a single plain-text source. It is simple to add additional directives to the `Makefile` as needed, such as a rule to create a Microsoft Word version of the syllabus. Writing the syllabus itself in a single file ensures that output files share common content regardless of the format. Automation with Make, moreover, both simplifies document generation (a command of only a single word, `make`, is needed) and guarantees that documents are consistently generated with each revision.
 
-[canvas]: https://www.instructure.com/canvas
-[latex_project]: https://www.latex-project.org/get/
-[make]: https://www.gnu.org/software/make/
-[pandoc_meta]: https://pandoc.org/MANUAL.html#metadata-blocks
-[pandoc_user]: https://pandoc.org/MANUAL.html#creating-a-pdf
-[pandoc-yaml]: https://pandoc.org/MANUAL.html#extension-yaml_metadata_block
-[pandoc]: https://pandoc.org
-[plain]: https://plain-text.co/pull-it-together.html#automation-with-make
-[yaml]: https://yaml.org
+[canvas]: https://www.instructure.com/canvas "Canvas by Instructure"
+[latex_project]: https://www.latex-project.org/get/ "LaTeX Project"
+[make]: https://www.gnu.org/software/make/ "GNU Make"
+[pandoc_meta]: https://pandoc.org/MANUAL.html#metadata-blocks "Pandoc User's Guide: Metadata blocks"
+[pandoc_user]: https://pandoc.org/MANUAL.html#creating-a-pdf "Pandoc User's Guide: Creating a PDF"
+[pandoc-yaml]: https://pandoc.org/MANUAL.html#extension-yaml_metadata_block "Pandoc User's Guide: YAML metadata block"
+[pandoc]: https://pandoc.org "Pandoc"
+[plain]: https://plain-text.co/pull-it-together.html#automation-with-make "The Plain Person's Guide to Plain Text Social Science: Automation with make"
+[yaml]: https://yaml.org "YAML"
 

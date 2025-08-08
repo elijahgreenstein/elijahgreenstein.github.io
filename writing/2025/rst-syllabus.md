@@ -146,19 +146,12 @@ I'll leave it to the reader to generate these results separately. Suffice to say
 At the start of a new term, it is now easy to update key details with a simple edit to `subst.rst` alone. Of course, more substantial revisions to the syllabus, such as a change to the course description or assessments, require editing that file directly.
 
 
-[rst_list_tables]: https://docutils.sourceforge.io/docs/ref/rst/directives.html#list-table
-    "reStructuredText Directives"
-[rst_hyperlink]: https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#hyperlink-targets
-    "reStructuredText Markup Specification"
-[rst_include]: https://docutils.sourceforge.io/docs/ref/rst/directives.html#including-an-external-document-fragment
-    "reStructuredText Directives"
-[rst_standalone]: https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#standalone-hyperlinks
-    "reStructuredText Markup Specification"
-[rst_replace]: https://docutils.sourceforge.io/docs/ref/rst/directives.html#replacement-text
-    "reStructuredText Directives"
-[rst_subst]: https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#substitution-definitions
-    "reStructuredText Markup Specification"
-[rst_subst_ref]: https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#substitution-references
-    "reStructuredText Markup Specification"
-[docutils]: https://docutils.sourceforge.io
-    "Docutils: Documentation Utilities"
+[docutils]: https://docutils.sourceforge.io "Docutils: Documentation Utilities"
+[rst_hyperlink]: https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#hyperlink-targets "reStructuredText Markup Specification"
+[rst_include]: https://docutils.sourceforge.io/docs/ref/rst/directives.html#including-an-external-document-fragment "reStructuredText Directives: Include"
+[rst_list_tables]: https://docutils.sourceforge.io/docs/ref/rst/directives.html#list-table "reStructuredText Directives: List tables"
+[rst_replace]: https://docutils.sourceforge.io/docs/ref/rst/directives.html#replacement-text "reStructuredText Directives: Replacement text"
+[rst_standalone]: https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#standalone-hyperlinks "reStructuredText Markup Specification: Standalone hyperlinks"
+[rst_subst_ref]: https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#substitution-references "reStructuredText Markup Specification: Substitution references"
+[rst_subst]: https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#substitution-definitions "reStructuredText Markup Specification: Substitution definitions"
+

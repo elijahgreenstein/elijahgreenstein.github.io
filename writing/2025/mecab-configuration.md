@@ -212,18 +212,18 @@ $ sed -i '' 's/"/”/g;' FILE.txt
 Other fields can be specified as found under "出力フォーマット" (output format) in the [documentation][mecab-format]. Note that `%f` and `%F` specify certain features. The list of features by field number is available in the [Unidic FAQ][unidic-faq], as are [Japanese versions of the field codes][unidic-col_name]. Paul O'Leary McCann, author of the [Fugashi][fugashi] Python package, provides an English-language overview of the fields in the `README` for his [unidic-py][unidic-py] package.
 
 
-[fugashi]: https://github.com/polm/fugashi
-[mecab-format]: https://taku910.github.io/mecab/format.html
-[mecab-unix]: https://taku910.github.io/mecab/#install-unix
-[mecab-usage]: https://taku910.github.io/mecab/#usage-tools
-[mecab]: https://taku910.github.io/mecab/
-[ninjal]: https://www.ninjal.ac.jp
-[ravina]: https://laits.utexas.edu/~mr56267/Japanese_Text_Mining/MeCab_RMeCab.html#installing-on-mac
-[rmecab]: https://github.com/IshidaMotohiro/RMeCab
-[unidic-col_name]: https://clrd.ninjal.ac.jp/unidic/faq.html#col_name
-[unidic-cwj]: https://clrd.ninjal.ac.jp/unidic/download.html#unidic_bccwj
-[unidic-faq]: https://clrd.ninjal.ac.jp/unidic/faq.html
-[unidic-modern]: https://clrd.ninjal.ac.jp/unidic/download_all.html#unidic_kindai
-[unidic-py]: https://github.com/polm/unidic-py
-[unidic]: https://clrd.ninjal.ac.jp/unidic/
+[fugashi]: https://github.com/polm/fugashi "Fugashi GitHub page"
+[mecab-format]: https://taku910.github.io/mecab/format.html "MeCab documentation: Output format"
+[mecab-unix]: https://taku910.github.io/mecab/#install-unix "MeCab documentation: Installation"
+[mecab-usage]: https://taku910.github.io/mecab/#usage-tools "MeCab documentation: Usage"
+[mecab]: https://taku910.github.io/mecab/ "MeCab documentation"
+[ninjal]: https://www.ninjal.ac.jp "National Institute for Japanese Language and Linguistics"
+[ravina]: https://laits.utexas.edu/~mr56267/Japanese_Text_Mining/MeCab_RMeCab.html#installing-on-mac "Installing MeCab, RMeCab and UniDic: On Mac"
+[rmecab]: https://github.com/IshidaMotohiro/RMeCab "RMeCab GitHub page"
+[unidic-col_name]: https://clrd.ninjal.ac.jp/unidic/faq.html#col_name "Unidic FAQ"
+[unidic-cwj]: https://clrd.ninjal.ac.jp/unidic/download.html#unidic_bccwj "Unidic for Contemporary Written Japanese download page"
+[unidic-faq]: https://clrd.ninjal.ac.jp/unidic/faq.html "Unidic FAQ"
+[unidic-modern]: https://clrd.ninjal.ac.jp/unidic/download_all.html#unidic_kindai "Modern Literary UniDic download page"
+[unidic-py]: https://github.com/polm/unidic-py "unidic-py GitHub page"
+[unidic]: https://clrd.ninjal.ac.jp/unidic/ "Unidic"
 
