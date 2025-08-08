@@ -24,7 +24,7 @@ p, li, dt, dd {
   line-height: 150%;
 }
 a:link {
-  color: teal;
+  color: #007070;
 }
 a:visited {
   color: #004040;
@@ -33,7 +33,7 @@ a:active {
   color: #777;
 }
 a#home {
-  color: teal;
+  color: #007070;
   font-size: 2rem;
 }
 a#home, #links a {
