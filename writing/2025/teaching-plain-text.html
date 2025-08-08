@@ -26,14 +26,14 @@
 <div class="body">
 <p>A few years ago, I started to use free, open-source software to prepare all of my teaching materials as plain text files. In my view, working directly in plain text offers educators several benefits:</p>
 <ul>
-<li>By using a simple markup language, such as <a href="https://daringfireball.net/projects/markdown/">Markdown</a>, educators can quickly draft materials without making decisions about the final format of those materials.</li>
+<li>By using a simple markup language, such as <a href="https://daringfireball.net/projects/markdown/" title="Markdown">Markdown</a>, educators can quickly draft materials without making decisions about the final format of those materials.</li>
 <li>We can use free, open-source software to convert the plain text content to a variety of formats, such as HTML for course webpages and PDF for printed materials.</li>
 <li>This allows us to maintain a common set of plain text files for a given course, regardless of the mode of course delivery (online, hybrid, or in-person).</li>
 <li>Perhaps most importantly, by deferring decisions about format (font, margins, etc.) for later, plain text also allows writers to focus on <em>writing</em>.</li>
 </ul>
 <p>Below I offer an overview of how I use open-source tools to prepare plain text teaching materials, with a focus on preparing materials for use on a course website. (Note that the intended reader is an educator without a background in programming; hence, what follows is a basic introduction to these tools.)</p>
 <h2 id="markdown">Markdown</h2>
-<p>I write most of my teaching materials using Markdown. Markdown is a simple markup language that authors can use to mark formatting in the text of a document. As Kieran Healey has noted in <a href="https://plain-text.co/write-and-edit.html#write-and-edit"><em>The Plain Person’s Guide to Plain Text Social Science</em></a>, Markdown has “become a <em>de facto</em> standard” for writing in plain text.</p>
+<p>I write most of my teaching materials using Markdown. Markdown is a simple markup language that authors can use to mark formatting in the text of a document. As Kieran Healey has noted in <a href="https://plain-text.co/write-and-edit.html#write-and-edit" title="The Plain Person's Guide to Plain Text Social Science: Write and edit"><em>The Plain Person’s Guide to Plain Text Social Science</em></a>, Markdown has “become a <em>de facto</em> standard” for writing in plain text.</p>
 <p>To create a Markdown file, open a plain text editor, such as Notepad (Windows) or TextEdit (Mac; change the settings from rich text to plain text). Enter text in the file and, by convention, save the file with the extension <code>.md</code> (e.g. <code>syllabus.md</code>).</p>
 <p>There are many guides to Markdown out there in addition to Healey’s <em>Guide</em> (I’ve included some links below), so I won’t devote much space to the specifics of Markdown here. By way of a brief example, sections are marked with hashtag characters (<code>#</code>), emphasized text is placed within single asterisk characters (<code>*</code>), and strongly emphasized text is placed between double asterisks:</p>
 <pre><code># A Section Heading
@@ -55,9 +55,9 @@ or to the course
 [Reading Schedule](&lt;URL&gt;).
 for details.
 </code></pre><h2 id="pandoc">Pandoc</h2>
-<p>I use <a href="https://pandoc.org">Pandoc</a> to convert Markdown documents to other formats, such as HTML, PDF, and Microsoft Word docx. Pandoc is open-source software written by John MacFarlane that converts between markup formats. I typically use Pandoc’s <a href="https://pandoc.org/MANUAL.html#pandocs-markdown">version of Markdown</a>, though <a href="https://pandoc.org/MANUAL.html#markdown-variants">other variants</a> are supported.</p>
+<p>I use <a href="https://pandoc.org" title="Pandoc">Pandoc</a> to convert Markdown documents to other formats, such as HTML, PDF, and Microsoft Word docx. Pandoc is open-source software written by John MacFarlane that converts between markup formats. I typically use Pandoc’s <a href="https://pandoc.org/MANUAL.html#pandocs-markdown" title="Pandoc User's Guide: Pandoc's markdown">version of Markdown</a>, though <a href="https://pandoc.org/MANUAL.html#markdown-variants" title="Pandoc User's Guide: Markdown variants">other variants</a> are supported.</p>
 <h3 id="markdown-to-html">Markdown to HTML</h3>
-<p>I post many of my teaching materials to <a href="https://www.instructure.com/canvas">Canvas LMS</a> (a learning management system). Instructors can add content to Canvas by using a rich text editor with a GUI (graphical user interface), but Canvas also provides a useful HTML editor. I find it convenient simply to paste raw HTML into the HTML editor.</p>
+<p>I post many of my teaching materials to <a href="https://www.instructure.com/canvas" title="Canvas by Instructure">Canvas LMS</a> (a learning management system). Instructors can add content to Canvas by using a rich text editor with a GUI (graphical user interface), but Canvas also provides a useful HTML editor. I find it convenient simply to paste raw HTML into the HTML editor.</p>
 <p>Pandoc is a command line tool; open a terminal to interact with Pandoc through typed commands.  The most basic way to generate HTML from a Markdown file (e.g. <code>syllabus.md</code>) is with a command such as the following:</p>
 <pre><code>pandoc -t html syllabus.md
 </code></pre><p>Pandoc converts the Markdown to HTML and prints the result to the terminal window. Note that by default, the HTML is a “fragment”—it lacks a <code>&lt;head&gt;</code> element or <code>&lt;body&gt;</code> tags. Fortunately, when using the Canvas HTML editor, a fragment is all that we need. Copy the output and paste it into the Canvas editor; Canvas handles the rest of the HTML. For a “standalone” HTML file with <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code> elements, use the <code>-s</code> standalone option:</p>
@@ -69,12 +69,12 @@ for details.
 <h3 id="markdown-to-pdf">Markdown to PDF</h3>
 <p>When I need to distribute a document in class, I use Pandoc to convert my Markdown files to separate PDF files (e.g. <code>syllabus.pdf</code>) and then print out the PDF files:</p>
 <pre><code>pandoc -o syllabus.pdf syllabus.md
-</code></pre><p>Note that Pandoc requires an installation of <a href="https://www.latex-project.org/">LaTeX</a> in order to produce PDF files. Pandoc first converts the files to plain text LaTeX files; then Pandoc uses a LaTeX generator to create the final PDF file. As with Markdown, there are many guides to LaTeX available online. The LaTeX Project has organized a <a href="https://www.latex-project.org/help/links/">number of useful links</a>, and I found “<a href="https://ctan.mirror.rafal.ca/info/lshort/english/lshort.pdf">The (Not So) Short Introduction to LaTeX2e</a>” and “<a href="https://ctan.org/pkg/latex2e-help-texinfo">LaTeX2e: An unofficial reference manual</a>” particularly useful.</p>
+</code></pre><p>Note that Pandoc requires an installation of <a href="https://www.latex-project.org/" title="LaTeX Project">LaTeX</a> in order to produce PDF files. Pandoc first converts the files to plain text LaTeX files; then Pandoc uses a LaTeX generator to create the final PDF file. As with Markdown, there are many guides to LaTeX available online. The LaTeX Project has organized a <a href="https://www.latex-project.org/help/links/" title="LaTeX Project: Useful Links">number of useful links</a>, and I found “<a href="https://ctan.mirror.rafal.ca/info/lshort/english/lshort.pdf" title="The (Not So) Short Introduction to LaTeX2e">The (Not So) Short Introduction to LaTeX2e</a>” and “<a href="https://ctan.org/pkg/latex2e-help-texinfo" title="LATEX2e: An unofficial reference manual">LaTeX2e: An unofficial reference manual</a>” particularly useful.</p>
 <p>Customization of PDF files with LaTeX is fairly involved, and I plan to write about my approach separately.</p>
 <h2 id="vim">Vim</h2>
-<p>I do most of my writing with the open-source text editor <a href="https://www.vim.org">Vim</a>. Vim allows users to rapidly navigate and edit text files with keyboard commands. Mac and Linux machines typically have Vim pre-installed. To use Vim, open a terminal and enter <code>vim</code>.</p>
+<p>I do most of my writing with the open-source text editor <a href="https://www.vim.org" title="Vim">Vim</a>. Vim allows users to rapidly navigate and edit text files with keyboard commands. Mac and Linux machines typically have Vim pre-installed. To use Vim, open a terminal and enter <code>vim</code>.</p>
 <p>Vim takes some getting used to. There are many guides to Vim online, but the quickest way to get started may be the build-in tutorial, which can be launched from the command line with <code>vimtutor</code>.</p>
-<p>Users can also customize also Vim with code written in Vimscript. I found Steve Losh’s online guide, “<a href="https://learnvimscriptthehardway.stevelosh.com">Learn Vimscript the Hard Way</a>,” to be particularly instructive here.</p>
+<p>Users can also customize also Vim with code written in Vimscript. I found Steve Losh’s online guide, “<a href="https://learnvimscriptthehardway.stevelosh.com" title="Learn Vimsceript the Hard Way">Learn Vimscript the Hard Way</a>,” to be particularly instructive here.</p>
 <h3 id="customization">Customization</h3>
 <p>I use a custom Vim command to simplify the conversion from Markdown to HTML:</p>
 <pre><code>let s:cmd=&quot;silent !pbpaste | pandoc -f markdown -t html | pbcopy&quot;
@@ -85,9 +85,9 @@ command -bar Mdhtml %y+ | exe s:cmd | redraw!
 <h2 id="appendix">Appendix</h2>
 <h3 id="markdown-resources">Markdown Resources</h3>
 <ul>
-<li>John Gruber’s <a href="https://daringfireball.net/projects/markdown/syntax">original specification</a></li>
-<li><a href="https://commonmark.org">CommonMark Markdown specification</a></li>
-<li><a href="https://pandoc.org/MANUAL.html#pandocs-markdown">Pandoc’s Markdown</a></li>
+<li>John Gruber’s <a href="https://daringfireball.net/projects/markdown/syntax" title="Markdown: Syntax">original specification</a></li>
+<li><a href="https://commonmark.org" title="CommonMark">CommonMark Markdown specification</a></li>
+<li><a href="https://pandoc.org/MANUAL.html#pandocs-markdown" title="Pandoc User's Guide: Pandoc's markdown">Pandoc’s Markdown</a></li>
 </ul>
 <h3 id="markdown-to-html-with-vim">Markdown to HTML with Vim</h3>
 <pre><code>let s:cmd=&quot;silent !pbpaste | pandoc -f markdown -t html | pbcopy&quot;
