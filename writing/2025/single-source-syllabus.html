@@ -43,7 +43,7 @@
 <span class="k">-</span><span class="w"> </span>Prerequisites: None
 </pre></div>
 <p>A basic Pandoc command to convert this to LaTeX is:</p>
-<div class="highlight"><pre><span></span><span class="gp">$ </span>pandoc<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>syllabus.tex<span class="w"> </span>syllabus.md
+<div class="highlight"><pre><span></span><span class="gp">% </span>pandoc<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>syllabus.tex<span class="w"> </span>syllabus.md
 </pre></div>
 <p>This command includes the <code>-s</code> option to create a “standalone” document. Here is the output (with much of the header removed to focus on the content):</p>
 <div class="highlight"><pre><span></span><span class="k">\title</span><span class="nb">{</span>ASIA 101 Introduction to Modern Asia<span class="nb">}</span>
@@ -73,7 +73,7 @@
 <p>On its own, this would serve as a satisfactory syllabus. Issues arise, however, when producing an HTML copy.</p>
 <h2 id="pandoc-and-html">Pandoc and HTML</h2>
 <p>Here is a basic command to convert the above Markdown to HTML:</p>
-<div class="highlight"><pre><span></span><span class="gp">$ </span>pandoc<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>syllabus.html<span class="w"> </span>syllabus.md
+<div class="highlight"><pre><span></span><span class="gp">% </span>pandoc<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>syllabus.html<span class="w"> </span>syllabus.md
 </pre></div>
 <p>This results in the following HTML (here I have removed the HTML <code>&lt;head&gt;</code> to show only the body content):</p>
 <div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">header</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;title-block-header&quot;</span><span class="p">&gt;</span>
@@ -100,11 +100,11 @@
 <div class="highlight"><pre><span></span><span class="gh"># Course information</span>
 </pre></div>
 <p>Next, I can prepare two different Pandoc commands. The first generates the PDF:</p>
-<div class="highlight"><pre><span></span><span class="gp">$ </span>pandoc<span class="w"> </span>--metadata-file<span class="o">=</span>pdf-meta.yaml<span class="w"> </span>-o<span class="w"> </span>syllabus.pdf<span class="w"> </span>syllabus.md
+<div class="highlight"><pre><span></span><span class="gp">% </span>pandoc<span class="w"> </span>--metadata-file<span class="o">=</span>pdf-meta.yaml<span class="w"> </span>-o<span class="w"> </span>syllabus.pdf<span class="w"> </span>syllabus.md
 </pre></div>
 <p>By including the <code>--metadata-file</code> option, I direct Pandoc to include my YAML file when generating the PDF.</p>
 <p>This second command generates HTML and copies it to my clipboard:</p>
-<div class="highlight"><pre><span></span><span class="gp">$ </span>pandoc<span class="w"> </span>-t<span class="w"> </span>html<span class="w"> </span>--shift-heading-level-by<span class="o">=</span><span class="m">1</span><span class="w"> </span>syllabus.md<span class="w"> </span><span class="p">|</span><span class="w"> </span>pbcopy
+<div class="highlight"><pre><span></span><span class="gp">% </span>pandoc<span class="w"> </span>-t<span class="w"> </span>html<span class="w"> </span>--shift-heading-level-by<span class="o">=</span><span class="m">1</span><span class="w"> </span>syllabus.md<span class="w"> </span><span class="p">|</span><span class="w"> </span>pbcopy
 </pre></div>
 <p>Note that I have included <code>--shift-heading-level-by=1</code>. With this option, Pandoc will now shift all of the Markdown headings one level when producing HTML tags. The result is:</p>
 <div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">h2</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;course-information&quot;</span><span class="p">&gt;</span>Course information<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
