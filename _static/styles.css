@@ -53,4 +53,7 @@ code {
 .highlight pre, .highlight pre span {
   font-family: monospace;
 }
+.highlight .gp {
+  user-select: none; /* No selection for generic prompt (console) */
+}
 
