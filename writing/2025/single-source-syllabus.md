@@ -1,7 +1,7 @@
 ---
 title: "A Single Source Syllabus"
 date: 2025-05-14
-revised: 2025-08-06
+revised: 2025-08-12
 keywords: Markdown, LaTeX, Pandoc, Make, teaching
 description: |
   I discuss how I use Markdown, LaTeX, Pandoc, and Make to prepare different different documents in different formats from a single plain-text source.
@@ -37,7 +37,7 @@ title: "ASIA 101 Introduction to Modern Asia"
 A basic Pandoc command to convert this to LaTeX is:
 
 ```console
-$ pandoc -s -o syllabus.tex syllabus.md
+% pandoc -s -o syllabus.tex syllabus.md
 ```
 
 This command includes the `-s` option to create a "standalone" document. Here is the output (with much of the header removed to focus on the content):
@@ -78,7 +78,7 @@ On its own, this would serve as a satisfactory syllabus. Issues arise, however, 
 Here is a basic command to convert the above Markdown to HTML:
 
 ```console
-$ pandoc -s -o syllabus.html syllabus.md
+% pandoc -s -o syllabus.html syllabus.md
 ```
 
 This results in the following HTML (here I have removed the HTML `<head>` to show only the body content):
@@ -122,7 +122,7 @@ The syllabus itself now begins with:
 Next, I can prepare two different Pandoc commands. The first generates the PDF:
 
 ```console
-$ pandoc --metadata-file=pdf-meta.yaml -o syllabus.pdf syllabus.md
+% pandoc --metadata-file=pdf-meta.yaml -o syllabus.pdf syllabus.md
 ```
 
 By including the `--metadata-file` option, I direct Pandoc to include my YAML file when generating the PDF.
@@ -130,7 +130,7 @@ By including the `--metadata-file` option, I direct Pandoc to include my YAML fi
 This second command generates HTML and copies it to my clipboard:
 
 ```console
-$ pandoc -t html --shift-heading-level-by=1 syllabus.md | pbcopy
+% pandoc -t html --shift-heading-level-by=1 syllabus.md | pbcopy
 ```
 
 Note that I have included `--shift-heading-level-by=1`. With this option, Pandoc will now shift all of the Markdown headings one level when producing HTML tags. The result is:

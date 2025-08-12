@@ -1,7 +1,7 @@
 ---
 title: "Some Notes on Configuring MeCab"
 date: 2025-07-08
-revised: 2025-08-06
+revised: 2025-08-12
 keywords: MeCab
 description: A description
 ---
@@ -17,21 +17,22 @@ Installation instructions are available on the MeCab [home page][mecab], but I c
 First, I cloned the repository:
 
 ```console
-$ git clone https://github.com/taku910/mecab.git
+% git clone https://github.com/taku910/mecab.git
 ```
 
 Then, I changed into the `mecab` subdirectory of the repository:
 
 ```console
-$ cd mecab/mecab/
+% cd mecab/mecab/
 ```
 
 Installation instructions are detailed in `INSTALL`, and basically follow the [UNIX installation][mecab-unix] instructions on the MeCab home page. To ensure that MeCab used UTF-8 encoding, I included the `--with-charset=utf8` option to configure the Makefile:
 
 ```console
-$ ./configure --with-charset=utf8
-$ make check
-$ sudo make install
+% ./configure --with-charset=utf8
+% make
+% make check
+% sudo make install
 ```
 
 This installs `mecab` into `/usr/local/bin` and creates a configuration file, `/usr/local/etc/mecabrc`. More on the configuration file in a moment.
@@ -39,21 +40,22 @@ This installs `mecab` into `/usr/local/bin` and creates a configuration file, `/
 MeCab also requires a dictionary. For this step, I changed into the IPADic directory in the repository:
 
 ```console
-$ cd ../mecab-ipadic/
+% cd ../mecab-ipadic/
 ```
 
 Installation instructions are, again, detailed in `INSTALL`. Once again, I set character encoding to UTF-8:
 
 ```console
-$ ./configure --with-charset=utf8
-$ make check
-$ sudo make install
+% ./configure --with-charset=utf8
+% make
+% make check
+% sudo make install
 ```
 
 This installs the IPADic dictionary into `/usr/local/lib/mecab/dic/ipadic`. Basic MeCab usage is detailed on the [Mecab home page][mecab-usage].
 
 ```console
-$ mecab
+% mecab
 すもももももももものうち
 ```
 
@@ -77,7 +79,7 @@ The [National Institute for Japanese Language and Linguistics][ninjal] also offe
 To download the dictionary (`unidic-cwj-202302`), click the download button (ライセンスに同意して最新版をダウンロード [agree to the license and download newest version]). Move `unidic-cwj-202302` and its contents from the `Downloads` directory to the directory of MeCab dictionaries, `/usr/local/lib/mecab/dic`. To open the dictionary directory, simply enter:
 
 ```console
-$ open /usr/local/lib/mecab/dic
+% open /usr/local/lib/mecab/dic
 ```
 
 I often work with Meiji, Taishō, and early Shōwa documents, so I also installed the ["Modern Literary UniDic" (近代文語UniDic)][unidic-modern]. 
@@ -95,7 +97,7 @@ dicdir =  /usr/local/lib/mecab/dic/ipadic
 We can check the dictionary used by MeCab with the `-D` option:
 
 ```console
-$ mecab -D
+% mecab -D
 ```
 
 The `filename` should be `/usr/local/lib/mecab/dic/ipadic/sys.dic`.
@@ -103,7 +105,7 @@ The `filename` should be `/usr/local/lib/mecab/dic/ipadic/sys.dic`.
 To use a different dictionary, we need to specify a different directory. We can do so by creating our own configuration file in our home directory. Change into the home directory and open a new configuration file, `.mecabrc`, with Vim:
 
 ```console
-$ cd ~ && vim .mecabrc
+% cd ~ && vim .mecabrc
 ```
 
 We can specify a different dictionary directory here (note that the first line is a comment):
@@ -122,7 +124,7 @@ There are a number of ways to interact with MeCab, such as the [RMeCab library][
 The default UniDic output is lengthy. For example:
 
 ```console
-$ mecab
+% mecab
 すもももももももものうち
 ```
 
@@ -152,7 +154,7 @@ eos-format-basic = EOS,,,,,,,2\n
 Note that each key is appended with `basic`. We can now produce output with those fields by invoking `mecab` with the `-O` flag set to `basic`:
 
 ```console
-$ mecab -Obasic
+% mecab -Obasic
 すもももももももものうち
 ```
 
@@ -183,13 +185,13 @@ Each line now has eight fields:
 It is now easy to create CSV files of tokenized text, with part-of-speech information. Let's say we have a Japanese text file, `maihime.txt`. We can produce a CSV file of tokens with:
 
 ```console
-$ mecab -Obasic maihime.txt > maihime.csv
+% mecab -Obasic maihime.txt > maihime.csv
 ```
 
 Likewise, we can process an entire directory of files, `texts`, and write the tokenized output to CSV files in `tokens` with a simple `for` loop:
 
 ```console
-$ for file in texts/*.txt ; \
+% for file in texts/*.txt ; \
 > do \
 > filename=${file%.txt} \
 > output=tokens/${filename##*/}.csv \
@@ -200,13 +202,13 @@ $ for file in texts/*.txt ; \
 Note that this can create problems if the text contains comma characters (`,`) ; the comma token will appear to have additional fields separated by the token itself. To prevent this, a simple `sed` command can replace all ASCII comma characters (`,`) with CJK comma characters (`、`):
 
 ```console
-$ sed -i '' 's/,/、/g;' FILE.txt
+% sed -i '' 's/,/、/g;' FILE.txt
 ```
 
 Likewise, text that contains double quotes characters (`"`) can pose a problem when reading the output CSV file. We can similarly replace these with CJK double quotes characters (`”`):
 
 ```console
-$ sed -i '' 's/"/”/g;' FILE.txt
+% sed -i '' 's/"/”/g;' FILE.txt
 ```
 
 Other fields can be specified as found under "出力フォーマット" (output format) in the [documentation][mecab-format]. Note that `%f` and `%F` specify certain features. The list of features by field number is available in the [Unidic FAQ][unidic-faq], as are [Japanese versions of the field codes][unidic-col_name]. Paul O'Leary McCann, author of the [Fugashi][fugashi] Python package, provides an English-language overview of the fields in the `README` for his [unidic-py][unidic-py] package.
