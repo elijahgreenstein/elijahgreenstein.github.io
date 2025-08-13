@@ -2,17 +2,17 @@
 title: Writing
 ---
 
+# Documentation
+
+- [Command Line Teaching][clt-doc] is a custom tool I wrote in Python to upload course materials to a learning management system. Documentation written in reStructuredText following the [Diátaxis][diataxis] framework and created with [Sphinx][sphinx].
+- [Pykari][pykari-doc] is a custom static site generator that I wrote in Python. Documentation written in Markdown and created with Pykari.
+
 # Technical
 
 - [Teaching in Plain Text](./writing/2025/teaching-plain-text.html) discusses how to use open-source software to write plain text teaching materials and distribute them in a variety of formats.
 - [Some Notes on Configuring MeCab](./writing/2025/mecab-configuration.html) provides details about how to install and configure MeCab, a Japanese text tokenizer.
 - [How to Structure reStructuredText for Quick Updates](./writing/2025/rst-syllabus.html) explains how to use text substitutions to facilitate periodic updates to projects, with a syllabus as an example.
 - [A Single Source Syllabus](./writing/2025/single-source-syllabus.html) is a guide to using Make to generate HTML and PDF teaching materials from a single Markdown source file.
-
-# Documentation
-
-- [Command Line Teaching][clt-doc] is a custom tool I wrote in Python to upload course materials to a learning management system. Documentation written in reStructuredText following the [Diátaxis][diataxis] approach; created with [Sphinx][sphinx].
-- [Pykari][pykari-doc] is a custom static site generator that I wrote in Python. Documentation written in Markdown and created with Pykari.
 
 # Academic
 
