@@ -1,6 +1,7 @@
 ---
 title: "Teaching in Plain Text"
 date: 2025-08-06
+revised: 2025-08-13
 keywords: Markdown, Pandoc, Vim, teaching
 description: |
   I discuss how I use Markdown, Pandoc, and Vim to prepare plain text teaching materials; the advantages of these tools; and the similarities of my approach to the "Docs as Code" approach to technical documentation.
