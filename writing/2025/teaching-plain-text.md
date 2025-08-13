@@ -102,7 +102,7 @@ Customization of PDF files with LaTeX is fairly involved, and I plan to write ab
 
 # Vim
 
-I do most of my writing with the open-source text editor [Vim][vim]. Vim allows users to rapidly navigate and edit text files with keyboard commands. Mac and Linux machines typically have Vim pre-installed. To use Vim, open a terminal and enter `vim`.
+I do most of my writing with the open-source text editor [Vim][vim]. Vim allows users to rapidly navigate and edit text files with keyboard commands. Follow the [Vim download instructions][vim-download] for details about installation (note that OSX typically has a version of Vim pre-installed). Once installed, open a terminal and enter `vim` to use the text editor.
 
 Vim takes some getting used to. There are many guides to Vim online, but the quickest way to get started may be the build-in tutorial, which can be launched from the command line with `vimtutor`.
 
@@ -172,6 +172,7 @@ Command on the second line:
 [pandoc-md]: https://pandoc.org/MANUAL.html#pandocs-markdown "Pandoc User's Guide: Pandoc's markdown"
 [pandoc]: https://pandoc.org "Pandoc"
 [plain]: https://plain-text.co/write-and-edit.html#write-and-edit "The Plain Person's Guide to Plain Text Social Science: Write and edit"
+[vim-download]: https://www.vim.org/download.php "Downloading Vim"
 [vim]: https://www.vim.org "Vim"
 [vimscript]: https://learnvimscriptthehardway.stevelosh.com "Learn Vimsceript the Hard Way"
 
