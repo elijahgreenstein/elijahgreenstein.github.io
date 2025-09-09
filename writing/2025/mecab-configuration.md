@@ -3,7 +3,8 @@ title: "Some Notes on Configuring MeCab"
 date: 2025-07-08
 revised: 2025-08-12
 keywords: MeCab
-description: A description
+description: |
+  An overview of how I installed and configured the MeCab tokenizer.
 ---
 
 I recently had occasion to install [MeCab][mecab], the Japanese text tokenizer and part of speech tagger, on a new Mac. In the past, I followed Mark Ravina's [guide to installing MeCab on a Mac][ravina], but this time I followed a slightly different process (namely, I did not find it necessary to get write privileges on `/usr/local` and I chose to clone the code from `git` rather than download the zipped archive of the source code).

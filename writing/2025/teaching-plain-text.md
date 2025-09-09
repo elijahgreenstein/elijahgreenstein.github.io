@@ -4,7 +4,7 @@ date: 2025-08-06
 revised: 2025-08-13
 keywords: Markdown, Pandoc, Vim, teaching
 description: |
-  I discuss how I use Markdown, Pandoc, and Vim to prepare plain text teaching materials; the advantages of these tools; and the similarities of my approach to the "Docs as Code" approach to technical documentation.
+  I discuss how I use Markdown, Pandoc, and Vim to prepare plain text teaching materials.
 ---
 
 A few years ago, I started to use free, open-source software to prepare all of my teaching materials as plain text files. In my view, working directly in plain text offers educators several benefits:
