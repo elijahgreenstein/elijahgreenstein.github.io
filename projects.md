@@ -8,6 +8,8 @@ title: Selected Projects
 
 An analysis of the evolving geography of Japanese shipping in the twentieth century based on historical data from ship logbooks. The visualization of Japanese ship movements and the reconstruction of shipping networks between world ports offer new insights on the expansion of Japanese ships in global transportation.
 
+![Japanese Shipping, 1937](./_static/images/jpn-azimuthal.jpg)
+
 ## Topics in Japanese Economic News
 
 An examination of public discussion of economic affairs through the analysis of textual data from three decades of newspaper articles. Methods from machine learning, such as topic modelling, make it possible to identify broad patterns in economic discourse in the Japanese press.
