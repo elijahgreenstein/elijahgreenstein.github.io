@@ -6,6 +6,9 @@ body {
   margin: auto;
   padding: 1rem;
 }
+img {
+  max-width: 30rem;
+}
 @media (min-width: 600px) {
   #menu {
     display: flex;
