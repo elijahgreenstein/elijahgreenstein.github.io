@@ -8,7 +8,7 @@ title: Selected Projects
 
 An analysis of the evolving geography of Japanese shipping in the twentieth century based on historical data from ship logbooks. The visualization of Japanese ship movements and the reconstruction of shipping networks between world ports offer new insights on the expansion of Japanese ships in global transportation.
 
-![Japanese Shipping, 1937](./_static/images/jpn-azimuthal.jpg)
+![Japanese Shipping, 1937](./_static/images/jpn-azimuthal.jpg){.proj-img}
 
 ## Topics in Japanese Economic News
 

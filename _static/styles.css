@@ -6,9 +6,6 @@ body {
   margin: auto;
   padding: 1rem;
 }
-img {
-  max-width: 30rem;
-}
 @media (min-width: 600px) {
   #menu {
     display: flex;
@@ -51,6 +48,13 @@ pre {
 code {
   font-family: monospace;
 }
+
+/* images */
+img.proj-img {
+  max-width: 30rem;
+  max-height: 20rem;
+}
+
 
 /* pygments - custom */
 .highlight pre, .highlight pre span {
