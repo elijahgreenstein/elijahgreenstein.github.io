@@ -9,6 +9,7 @@ title: Writing
 
 # Technical
 
+- [Plain text presentation slides](./writing/2025/plain-presentation.html) is an overview of how I use Pandoc and Make to prepare PDF slide shows from Markdown files.
 - [Teaching in Plain Text](./writing/2025/teaching-plain-text.html) discusses how to use open-source software to write plain text teaching materials and distribute them in a variety of formats.
 - [Some Notes on Configuring MeCab](./writing/2025/mecab-configuration.html) provides details about how to install and configure MeCab, a Japanese text tokenizer.
 - [How to Structure reStructuredText for Quick Updates](./writing/2025/rst-syllabus.html) explains how to use text substitutions to facilitate periodic updates to projects, with a syllabus as an example.
